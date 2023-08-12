@@ -5,6 +5,7 @@ Which product was the cheapest one sold in January, and what was the price?
 What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
 Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+List all the products sold in Los Angeles in February, and include how many of each were sold.
 
 
 
@@ -57,6 +58,11 @@ count(distinct cust.acctnum),
 avg(quantity*price)
 FROM BIT_DB.FebSales Feb
 LEFT JOIN BIT_DB.customers cust
+
+SELECT Product, SUM(quantity)
+FROM BIT_DB.FebSales
+WHERE location like '%Los Angeles%'
+GROUP BY Product
 ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
 AND length(orderid) = 6 
